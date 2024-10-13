@@ -1,0 +1,25 @@
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/packages/modules/adb" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/core" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/libbase" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/libziparchive" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/system/incremental_delivery" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/boringssl" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/brotli" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/lz4" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/zstd" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/googletest" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/protobuf" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/zlib" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/libusb" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/fmtlib" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/openscreen" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/mdnsresponder" --depth 1
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/frameworks/base" --depth 1 --filter=blob:none --sparse
+cd base
+git sparse-checkout init --cone
+git sparse-checkout set libs/androidfw
+git clone "https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/frameworks/native" --depth 1 --filter=blob:none --sparse
+cd base
+git sparse-checkout init --cone
+git sparse-checkout set libs/binder
+

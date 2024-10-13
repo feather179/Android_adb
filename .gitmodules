@@ -1,0 +1,21 @@
+[submodule "boringssl"]
+	path = boringssl
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/boringssl
+[submodule "brotli"]
+	path = brotli
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/brotli
+[submodule "fmtlib"]
+	path = fmtlib
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/fmtlib
+[submodule "googletest"]
+	path = googletest
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/googletest
+[submodule "lz4"]
+	path = lz4
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/lz4
+[submodule "protobuf"]
+	path = protobuf
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/protobuf
+[submodule "zstd"]
+	path = zstd
+	url = https://mirrors.tuna.tsinghua.edu.cn/git/AOSP/platform/external/zstd
