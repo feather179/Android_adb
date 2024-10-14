@@ -20,6 +20,8 @@ add_subdirectory(boringssl)
 set(protobuf_BUILD_TESTS OFF)
 set(protobuf_BUILD_PROTOC_BINARIES OFF)
 add_subdirectory(protobuf)
+target_include_directories(libprotobuf PRIVATE ${protobuf_SOURCE_DIR}/android)
+target_include_directories(libprotobuf-lite PRIVATE ${protobuf_SOURCE_DIR}/android)
 
 set(LZ4_BUILD_CLI OFF)
 add_subdirectory(lz4/build/cmake)
