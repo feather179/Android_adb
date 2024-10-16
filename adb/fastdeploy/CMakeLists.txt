@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.21)
 
 project(deployagent LANGUAGES Java)
 
+add_subdirectory(proto)
+
 find_package(Java REQUIRED)
 include(UseJava)
 
@@ -12,7 +14,8 @@ set(DEPLOYAGENT_JAR ${CMAKE_CURRENT_BINARY_DIR}/deployagent.jar)
 
 
 file(GLOB FASTDEPLOY_SRCS "deployagent/src/com/android/fastdeploy/*.java")
-file(GLOB FASTDEPLOY_PROTO_SRCS "proto/com/android/fastdeploy/*.java")
+file(GLOB FASTDEPLOY_PROTO_SRCS "${CMAKE_CURRENT_BINARY_DIR}/proto/com/android/fastdeploy/*.java")
+
 
 add_jar(${PROJECT_NAME}
     ${FASTDEPLOY_SRCS}
@@ -20,13 +23,13 @@ add_jar(${PROJECT_NAME}
 
     INCLUDE_JARS
     ${ANDROID_JAR}
-    protobuf-java-3.21.12.jar
+    ${PROTOBUF_JAR}
 
     OUTPUT_NAME
     ${DEPLOYAGENT_CLASSES}
 )
 
-add_custom_target(deployagent_post_process ALL
+add_custom_target(deployagent_post_process
     COMMAND ${ANDROID_D8} --min-api 26 --output ${DEPLOYAGENT_JAR} ${DEPLOYAGENT_CLASSES_JAR}
     COMMAND pwsh -File bin2c.ps1 -FilePath ${CMAKE_CURRENT_BINARY_DIR}/deployagent.jar -VariableName kDeployAgent -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagent.inc
     COMMAND pwsh -File bin2c.ps1 -FilePath deployagent/deployagent.sh -VariableName kDeployAgentScript -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagentscript.inc

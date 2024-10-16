@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(fastdeploy)
+add_subdirectory(proto)
 
 set(LIBADB_SRCS
     adb.cpp
@@ -58,11 +59,10 @@ set(FASTDEPLOY_SRCS
 )
 
 set(PROTO_SRCS
-    proto/adb_host.pb.cc
-    proto/app_processes.pb.cc
-    # proto/pairing.pb.cc
-    # proto/adb_known_hosts.pb.cc
-    fastdeploy/proto/ApkEntry.pb.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/proto/adb_host.pb.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/proto/app_processes.pb.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/proto/key_type.pb.cc
+    ${CMAKE_CURRENT_BINARY_DIR}/fastdeploy/proto/ApkEntry.pb.cc
 )
 
 set(ADB_CRYPTO_SRCS
@@ -124,14 +124,12 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE ANDROID_BASE_UNIQUE_FD_DISABL
 target_compile_options(${PROJECT_NAME} PRIVATE -Wno-inconsistent-missing-override)
 
 target_include_directories(${PROJECT_NAME} PRIVATE
-    .
-    proto
-    fastdeploy
+    ${CMAKE_CURRENT_SOURCE_DIR}
     crypto/include
     tls/include
-    pairing_connection/include
-    pairing_auth/include
     ${CMAKE_CURRENT_BINARY_DIR}/fastdeploy
+    ${CMAKE_CURRENT_BINARY_DIR}/fastdeploy/proto
+    ${CMAKE_CURRENT_BINARY_DIR}/proto
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
