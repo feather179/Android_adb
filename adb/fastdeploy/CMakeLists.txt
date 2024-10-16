@@ -31,8 +31,10 @@ add_jar(${PROJECT_NAME}
 
 add_custom_target(deployagent_post_process
     COMMAND ${ANDROID_D8} --min-api 26 --output ${DEPLOYAGENT_JAR} ${DEPLOYAGENT_CLASSES_JAR}
-    COMMAND pwsh -File bin2c.ps1 -FilePath ${CMAKE_CURRENT_BINARY_DIR}/deployagent.jar -VariableName kDeployAgent -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagent.inc
-    COMMAND pwsh -File bin2c.ps1 -FilePath deployagent/deployagent.sh -VariableName kDeployAgentScript -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagentscript.inc
+    # COMMAND pwsh -File bin2c.ps1 -FilePath ${CMAKE_CURRENT_BINARY_DIR}/deployagent.jar -VariableName kDeployAgent -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagent.inc
+    # COMMAND pwsh -File bin2c.ps1 -FilePath deployagent/deployagent.sh -VariableName kDeployAgentScript -OutputFile ${CMAKE_CURRENT_BINARY_DIR}/deployagentscript.inc
+    COMMAND cmd /C "(echo unsigned char kDeployAgent[] = { && ${XXD_EXE} -i < ${CMAKE_CURRENT_BINARY_DIR}/deployagent.jar && echo };) > ${CMAKE_CURRENT_BINARY_DIR}/deployagent.inc"
+    COMMAND cmd /C "(echo unsigned char kDeployAgentScript[] = { && ${XXD_EXE} -i < ${CMAKE_CURRENT_SOURCE_DIR}/deployagent/deployagent.sh && echo };) > ${CMAKE_CURRENT_BINARY_DIR}/deployagentscript.inc"
     DEPENDS ${PROJECT_NAME}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )

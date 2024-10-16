@@ -7,6 +7,7 @@ set(ANDROID_JAR D:/ProgramFiles/Android/sdk/platforms/android-35/android.jar)
 set(ANDROID_D8 D:/ProgramFiles/Android/sdk/build-tools/35.0.0/d8.bat)
 set(PROTOC_EXE ${CMAKE_CURRENT_SOURCE_DIR}/protoc.exe)
 set(PROTOBUF_JAR ${CMAKE_CURRENT_SOURCE_DIR}/protobuf-java-3.21.12.jar)
+set(XXD_EXE ${CMAKE_CURRENT_SOURCE_DIR}/xxd.exe)
 
 project(android-adb VERSION 1.0.0 LANGUAGES C CXX)
 

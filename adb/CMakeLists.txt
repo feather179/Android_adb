@@ -127,6 +127,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
     crypto/include
     tls/include
+    ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}/fastdeploy
     ${CMAKE_CURRENT_BINARY_DIR}/fastdeploy/proto
     ${CMAKE_CURRENT_BINARY_DIR}/proto
