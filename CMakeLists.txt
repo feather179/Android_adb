@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.21)
 
-set(CMAKE_TOOLCHAIN_FILE D:/ProgramFiles/Android/sdk/ndk/27.0.12077973/build/cmake/android.toolchain.cmake)
+file(TO_CMAKE_PATH ${ANDROID_NDK_ROOT} ANDROID_NDK_ROOT_CMAKE_PATH)
+file(TO_CMAKE_PATH ${ANDROID_SDK_ROOT} ANDROID_SDK_ROOT_CMAKE_PATH)
+
+set(CMAKE_TOOLCHAIN_FILE ${ANDROID_NDK_ROOT_CMAKE_PATH}/build/cmake/android.toolchain.cmake)
 set(ANDROID_ABI arm64-v8a)
 set(ANDROID_PLATFORM android-30)
-set(ANDROID_JAR D:/ProgramFiles/Android/sdk/platforms/android-35/android.jar)
-set(ANDROID_D8 D:/ProgramFiles/Android/sdk/build-tools/35.0.0/d8.bat)
+set(ANDROID_JAR ${ANDROID_SDK_ROOT_CMAKE_PATH}/platforms/android-35/android.jar)
+set(ANDROID_D8 ${ANDROID_SDK_ROOT_CMAKE_PATH}/build-tools/35.0.0/d8.bat)
 set(PROTOC_EXE ${CMAKE_CURRENT_SOURCE_DIR}/protoc.exe)
 set(PROTOBUF_JAR ${CMAKE_CURRENT_SOURCE_DIR}/protobuf-java-3.21.12.jar)
 set(XXD_EXE ${CMAKE_CURRENT_SOURCE_DIR}/xxd.exe)
