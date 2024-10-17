@@ -25,6 +25,11 @@ jobs:
       with:
           submodules: recursive
 
+    - uses: actions/setup-java@v4
+      with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
+
     - uses: ashutoshvarma/setup-ninja@master
       with:
           # ninja version to download. Default: 1.10.0
