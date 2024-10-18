@@ -53,8 +53,18 @@ jobs:
     #   # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
     #   run: ctest -C ${{env.BUILD_TYPE}}
 
+    - name: Get current date
+      # Build your program with the given configuration
+      # run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+      run: |
+        $currentDate = Get-Date -Format 'yyyy-MM-dd'
+        echo "CURRENT_DATE=$currentDate" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+        Write-Host "Current date is: $currentDate"
+      shell: powershell
+
     - name: Release
       uses: softprops/action-gh-release@v2
       with:
         files: ${{github.workspace}}/build/adb/adb
+        tag_name: ${{ env.CURRENT_DATE }}
 
