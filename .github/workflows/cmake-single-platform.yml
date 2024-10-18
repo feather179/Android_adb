@@ -67,4 +67,5 @@ jobs:
       with:
         files: ${{github.workspace}}/build/adb/adb
         tag_name: ${{ env.CURRENT_DATE }}
+        token: ${{ secrets.GITHUB_TOKEN }}
 
