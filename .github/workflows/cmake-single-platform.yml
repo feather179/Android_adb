@@ -64,10 +64,9 @@ jobs:
 
     - name: Release
       uses: softprops/action-gh-release@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ env.CURRENT_DATE }}
         files: ${{github.workspace}}/build/adb/adb
+        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         
 
