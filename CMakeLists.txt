@@ -41,7 +41,7 @@ add_subdirectory(incremental_delivery/incfs)
 add_subdirectory(native/libs/binder)
 add_subdirectory(base/libs/androidfw)
 
-# add_subdirectory(libusb)
+add_subdirectory(libusb)
 # add_subdirectory(openscreen)
 # add_subdirectory(mdnsresponder)
 

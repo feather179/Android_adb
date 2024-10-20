@@ -41,6 +41,11 @@ bool is_libusb_enabled();
 
 namespace libusb {
 void usb_init();
+void usb_init(int fd);
+}
+
+namespace android {
+void usb_init(int fd);
 }
 
 struct UsbConnection : public BlockingConnection {

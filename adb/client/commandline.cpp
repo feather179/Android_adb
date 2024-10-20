@@ -1559,6 +1559,7 @@ int adb_commandline(int argc, const char** argv) {
     int r;
     TransportType transport_type = kTransportAny;
     int ack_reply_fd = -1;
+    int device_fd = -1;
 
 #if !defined(_WIN32)
     // We'd rather have EPIPE than SIGPIPE.
@@ -1590,6 +1591,16 @@ int adb_commandline(int argc, const char** argv) {
             ack_reply_fd = strtol(reply_fd_str, nullptr, 10);
             if (!_is_valid_ack_reply_fd(ack_reply_fd)) {
                 fprintf(stderr, "adb: invalid reply fd \"%s\"\n", reply_fd_str);
+                return 1;
+            }
+        } else if (!strcmp(argv[0], "--device-fd")) {
+            if (argc < 2) error_exit("--device-fd requires an argument");
+            const char* device_fd_str = argv[1];
+            --argc;
+            ++argv;
+            device_fd = strtol(device_fd_str, nullptr, 10);
+            if (device_fd <= 2) {
+                fprintf(stderr, "adb: invalid device fd \"%s\"\n", device_fd_str);
                 return 1;
             }
         } else if (!strcmp(argv[0], "--one-device")) {
@@ -1720,7 +1731,7 @@ int adb_commandline(int argc, const char** argv) {
                 fprintf(stderr, "reply fd for adb server to client communication not specified.\n");
                 return 1;
             }
-            r = adb_server_main(is_daemon, server_socket_str, one_device_str, ack_reply_fd);
+            r = adb_server_main(is_daemon, server_socket_str, one_device_str, ack_reply_fd, device_fd);
         } else {
             r = launch_server(server_socket_str, one_device_str);
         }

@@ -48,7 +48,8 @@ set(LIBADB_POSIX_SRCS
 )
 
 set(LIBADB_LINUX_SRCS
-    client/usb_linux.cpp
+    client/usb_android.cpp
+    client/usb_libusb_android.cpp
     fdevent/fdevent_epoll.cpp
 )
 
@@ -148,7 +149,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     brotlicommon-static
     brotlidec-static
     brotlienc-static
-    # usb
+    usb
     # openscreen
     # mdnssd
 )

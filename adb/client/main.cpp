@@ -84,7 +84,7 @@ static void intentionally_leak() {
 // one_device: if null, server owns all devices, else server owns only
 //     device where atransport::MatchesTarget(one_device) is true.
 int adb_server_main(int is_daemon, const std::string& socket_spec, const char* one_device,
-                    int ack_reply_fd) {
+                    int ack_reply_fd, int device_fd) {
 #if defined(_WIN32)
     // adb start-server starts us up with stdout and stderr hooked up to
     // anonymous pipes. When the C Runtime sees this, it makes stderr and
@@ -136,15 +136,21 @@ int adb_server_main(int is_daemon, const std::string& socket_spec, const char* o
     //     init_mdns_transport_discovery();
     // }
 
-    if (!getenv("ADB_USB") || strcmp(getenv("ADB_USB"), "0") != 0) {
-        if (is_libusb_enabled()) {
-            // libusb::usb_init();
-        } else {
-            usb_init();
-        }
+    if (is_libusb_enabled()) {
+        libusb::usb_init(device_fd);
     } else {
-        adb_notify_device_scan_complete();
+        android::usb_init(device_fd);
     }
+
+    // if (!getenv("ADB_USB") || strcmp(getenv("ADB_USB"), "0") != 0) {
+    //     if (is_libusb_enabled()) {
+    //         // libusb::usb_init();
+    //     } else {
+    //         usb_init();
+    //     }
+    // } else {
+    //     adb_notify_device_scan_complete();
+    // }
 
     if (!getenv("ADB_EMU") || strcmp(getenv("ADB_EMU"), "0") != 0) {
         local_init(android::base::StringPrintf("tcp:%d", DEFAULT_ADB_LOCAL_TRANSPORT_PORT));
